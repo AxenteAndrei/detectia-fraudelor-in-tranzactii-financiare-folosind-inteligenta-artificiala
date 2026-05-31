@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detectie Frauda Financiara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Detectie Frauda Financiara</h1>
+    <div class="sub">Model: RandomForest + SMOTE &nbsp;&middot;&nbsp; AUC-PR = 0.8842</div>
+  </div>
+  <div class="health"><span id="hdot" class="dot"></span><span id="htext">verificare...</span></div>
+</header>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR: parametri ============ -->
+  <aside class="sidebar">
+    <h2 class="side-title">Parametrii tranzactiei</h2>
+    <p class="side-hint">Genereaza un exemplu reprezentativ sau ajusteaza manual sliderii.</p>
+
+    <div class="gen-row">
+      <button class="btn btn-green" id="btn-gen-legit" type="button">Genereaza LEGITIMA</button>
+      <button class="btn btn-red" id="btn-gen-fraud" type="button">Genereaza FRAUDA</button>
+    </div>
+
+    <button class="btn btn-primary" id="btn-verify" type="button">Verifica tranzactie</button>
+
+    <div class="sec-title">Tranzactie (valori reale)</div>
+    <div id="grp-real"></div>
+
+    <div class="sec-title">Top 5 features (cele mai influente)</div>
+    <p class="sec-hint">Marcate cu <b>*</b> &mdash; impact major in decizia modelului.</p>
+    <div id="grp-top"></div>
+
+    <div class="grp-toggle" id="t-rest1" data-target="rest1">
+      <span class="chev"></span> Alte componente PCA (V1 &ndash; V14)
+    </div>
+    <div class="grp-body" id="grp-rest1"></div>
+
+    <div class="grp-toggle" id="t-rest2" data-target="rest2">
+      <span class="chev"></span> Alte componente PCA (V15 &ndash; V28)
+    </div>
+    <div class="grp-body" id="grp-rest2"></div>
+  </aside>
+
+  <!-- ============ MAIN: rezultat + istoric + ghid ============ -->
+  <main class="main">
+
+    <div class="card">
+      <h2>Rezultat</h2>
+      <div id="result"><p class="empty">Apasa <b>Verifica tranzactie</b> pentru a vedea predictia modelului.</p></div>
+    </div>
+
+    <div class="card">
+      <h2>Tranzactii recente (sesiune curenta)</h2>
+      <div id="history"><p class="empty">Nu exista tranzactii verificate inca.</p></div>
+    </div>
+
+    <div class="card">
+      <h2>Ghid parametri</h2>
+      <details class="guide">
+        <summary>Ce reprezinta fiecare parametru?</summary>
+        <dl id="guide"></dl>
+      </details>
+    </div>
+
+  </main>
+</div>
+
+<footer>Model: RandomForest + SMOTE &nbsp;&middot;&nbsp; Dataset: CreditCard Fraud ULB &nbsp;&middot;&nbsp; Lucrare de licenta &mdash; ULBS, Informatica</footer>
+
+<!-- tooltip global, rendered la <body> ca sa NU fie clipped de overflow-ul sidebar-ului -->
+<div id="tip" hidden></div>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>

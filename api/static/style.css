@@ -1,0 +1,311 @@
+/* ============================================================
+   Detectie Frauda Financiara — stil dark, neutru (no accent).
+   Verde / rosu rezervate STRICT pentru indicatori semantici
+   (badge LEGITIMA/FRAUDA, butoane de generare, dot "online").
+   ============================================================ */
+
+:root{
+  --bg:#0a0d14;
+  --bg-side:#070912;
+  --panel:#141a26;
+  --panel-2:#1c2435;
+  --border:#222b3d;
+  --border-soft:#1a2235;
+
+  --text:#ffffff;
+  --muted:#9ca3af;
+  --muted-2:#6b7280;
+
+  /* "accent" = alb / nuante de gri neutru */
+  --line:#374151;          /* gri inchis pentru contururi / btn-primary */
+  --line-2:#1f2937;        /* fundal pentru btn-primary / info-icon */
+
+  --green:#16a34a;
+  --green-2:#22c55e;
+  --green-soft:rgba(34,197,94,.14);
+  --red:#dc2626;
+  --red-2:#ef4444;
+  --red-soft:rgba(239,68,68,.14);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0; padding:0;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:14px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+
+/* =================================================== header */
+header{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  gap:14px; padding:18px 28px;
+  background:var(--bg-side);
+  border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:40;
+}
+header h1{font-size:1.25rem; margin:0; font-weight:700; letter-spacing:-.01em; color:var(--text);}
+header .sub{color:var(--muted); font-size:.82rem; margin-top:3px; font-weight:500;}
+.health{
+  display:flex; align-items:center; gap:8px;
+  font-size:.82rem; color:var(--muted); font-weight:500;
+  background:var(--panel); padding:7px 13px; border-radius:20px; border:1px solid var(--border);
+}
+.dot{width:8px; height:8px; border-radius:50%; background:#555;}
+.dot.ok{background:var(--green-2);}     /* semantic: online */
+.dot.err{background:var(--red-2);}      /* semantic: offline */
+
+/* =================================================== app layout */
+.app{ display:flex; align-items:flex-start; min-height:calc(100vh - 68px); }
+
+.sidebar{
+  width:360px; flex-shrink:0;
+  background:var(--bg-side);
+  border-right:1px solid rgba(255,255,255,.08);
+  padding:22px 20px 28px;
+  position:sticky; top:68px;
+  max-height:calc(100vh - 68px);
+  overflow-y:auto;
+}
+.sidebar::-webkit-scrollbar{width:8px;}
+.sidebar::-webkit-scrollbar-track{background:transparent;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border); border-radius:4px;}
+.sidebar::-webkit-scrollbar-thumb:hover{background:var(--panel-2);}
+
+.main{ flex:1; min-width:0; padding:26px 30px; }
+
+@media (max-width:980px){
+  .app{flex-direction:column;}
+  .sidebar{width:100%; position:static; max-height:none; border-right:none; border-bottom:1px solid var(--border);}
+  .main{padding:22px 18px;}
+}
+
+/* =================================================== sidebar content */
+.side-title{
+  font-size:1.02rem; font-weight:700; margin:0 0 4px;
+  letter-spacing:-.005em; color:var(--text);
+}
+.side-hint{
+  color:var(--muted); font-size:.78rem; margin:0 0 14px; line-height:1.45;
+}
+
+.gen-row{display:flex; gap:10px; margin-bottom:10px;}
+.gen-row .btn{flex:1;}
+
+.btn{
+  border:none; border-radius:10px; padding:11px 14px;
+  font-family:inherit; font-size:.85rem; font-weight:600;
+  cursor:pointer; color:#fff;
+  transition:filter .15s, transform .05s, background .15s, border-color .15s;
+}
+.btn:active{transform:translateY(1px);}
+.btn:hover{filter:brightness(1.1);}
+.btn-green{background:var(--green);}          /* semantic: genereaza legitima */
+.btn-red{background:var(--red);}              /* semantic: genereaza frauda */
+
+/* "Verifica tranzactie" — neutral dark cu border, fara accent colorat */
+.btn-primary{
+  background:var(--line-2); color:#fff; border:1px solid var(--line);
+  width:100%; padding:11px 14px;
+  font-size:.9rem; margin:0 0 6px;
+}
+.btn-primary:hover{ filter:none; background:var(--line); }
+
+.sec-title{
+  font-size:.88rem; font-weight:700; letter-spacing:0;
+  color:var(--text);
+  margin:18px 0 4px;
+}
+.sec-hint{color:var(--muted); font-size:.76rem; margin:0 0 8px;}
+
+/* slider */
+.slider{margin:10px 0 4px;}
+.slider .lab{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:.83rem; gap:8px; min-height:20px;
+}
+.slider .lab .name{color:var(--text); display:inline-flex; align-items:center;}
+.slider .lab .name.top{font-weight:700; color:var(--text);}
+.slider .lab .val{color:var(--muted); font-variant-numeric:tabular-nums; font-weight:500; min-width:70px; text-align:right; font-size:.8rem;}
+input[type=range]{
+  -webkit-appearance:none; width:100%; height:4px;
+  border-radius:3px; background:var(--panel-2); outline:none; margin-top:7px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:14px; height:14px; border-radius:50%;
+  background:#ffffff; cursor:pointer;
+  border:2px solid var(--bg);
+}
+input[type=range]::-moz-range-thumb{
+  width:14px; height:14px; border-radius:50%;
+  background:#ffffff; cursor:pointer;
+  border:2px solid var(--bg);
+}
+/* top-5 sliders: diferentiate doar prin font bold pe label, thumb-ul ramane alb */
+
+/* info icon + tooltip */
+.info-icon{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:14px; height:14px; margin-left:6px;
+  border-radius:50%;
+  background:var(--line-2); color:#ffffff;
+  border:1px solid var(--line);
+  font-size:.62rem; font-weight:700; cursor:help;
+  line-height:1; user-select:none;
+  transition:background .15s, color .15s;
+}
+.info-icon:hover{ background:var(--line); color:#ffffff; }
+
+#tip{
+  position:fixed; z-index:100;
+  max-width:260px; min-width:180px;
+  background:var(--line-2); border:1px solid var(--line);
+  padding:10px 13px; border-radius:9px;
+  font-size:.77rem; line-height:1.5; color:#ffffff; font-weight:400;
+  box-shadow:0 12px 32px rgba(0,0,0,.6);
+  pointer-events:none;
+}
+#tip[hidden]{display:none;}
+
+/* accordion (rest1, rest2) */
+.grp-toggle{
+  display:flex; align-items:center; gap:8px;
+  cursor:pointer; user-select:none;
+  color:var(--text); font-size:.82rem; font-weight:600;
+  margin:14px 0 4px; padding:9px 11px;
+  background:var(--panel); border:1px solid var(--border-soft); border-radius:8px;
+  transition:background .15s;
+}
+.grp-toggle:hover{background:var(--panel-2);}
+.grp-toggle .chev{
+  display:inline-block; width:0; height:0;
+  border-left:5px solid transparent; border-right:5px solid transparent;
+  border-top:6px solid var(--muted);
+  transform:rotate(-90deg); transition:transform .15s;
+}
+.grp-toggle.open .chev{transform:rotate(0);}
+.grp-body{display:none; padding:4px 4px 6px;}
+.grp-body.open{display:block;}
+
+/* =================================================== main / cards */
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:22px 24px;
+  margin-bottom:20px;
+}
+.card h2{
+  font-size:1.05rem; margin:0 0 16px; font-weight:700;
+  letter-spacing:-.005em; color:var(--text);
+}
+.card .empty{color:var(--muted); font-size:.85rem; font-style:italic;}
+
+/* result — badge mare semantic verde/rosu */
+.res-head{ width:100%; }
+.badge{
+  display:flex; align-items:center; justify-content:center;
+  gap:12px; width:100%;
+  padding:20px 22px; border-radius:14px;
+  font-weight:700; font-size:22px; letter-spacing:.2px;
+}
+.badge::before{
+  content:""; width:10px; height:10px; border-radius:50%;
+}
+.badge.fraud{
+  background:var(--red-soft); color:#fca5a5;
+  border:1px solid rgba(239,68,68,.45);
+}
+.badge.fraud::before{background:var(--red-2);}
+.badge.legit{
+  background:var(--green-soft); color:#86efac;
+  border:1px solid rgba(34,197,94,.45);
+}
+.badge.legit::before{background:var(--green-2);}
+
+.bar-wrap{margin:22px 0 8px;}
+.bar-lab{
+  display:flex; justify-content:space-between;
+  font-size:.8rem; color:var(--muted); margin-bottom:6px; font-weight:500;
+}
+.bar{
+  height:14px; border-radius:8px;
+  background:var(--panel-2); overflow:hidden;
+  border:1px solid var(--border-soft);
+}
+.bar > span{
+  display:block; height:100%; width:0; border-radius:7px;
+  transition:width .5s cubic-bezier(.2,.7,.3,1);
+}
+.bar > span.fraud{background:linear-gradient(90deg,#ef4444 0%,#dc2626 100%);}
+.bar > span.legit{background:linear-gradient(90deg,#22c55e 0%,#16a34a 100%);}
+
+.msg{
+  background:var(--panel-2);
+  border-left:3px solid var(--line);
+  border-radius:8px; padding:12px 14px;
+  font-size:.86rem; color:#dde3f0; margin-top:16px; line-height:1.5;
+}
+
+.res-sub-title{
+  font-size:.95rem; font-weight:700; letter-spacing:0;
+  color:var(--text);
+  margin:22px 0 8px;
+}
+
+/* tabel top5 + istoric */
+table{
+  width:100%; border-collapse:collapse;
+  font-size:.85rem;
+}
+th,td{
+  text-align:left; padding:10px 12px;
+  border-bottom:1px solid var(--border-soft);
+}
+th{
+  color:var(--muted); font-weight:600;
+  font-size:.82rem; letter-spacing:0;
+  border-bottom:1px solid var(--border);
+}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,.03);}
+
+.pill{
+  display:inline-block;
+  padding:4px 12px; border-radius:14px;
+  font-size:.72rem; font-weight:700; letter-spacing:.04em;
+}
+.pill.fraud{background:var(--red-soft); color:#fca5a5; border:1px solid rgba(239,68,68,.4);}
+.pill.legit{background:var(--green-soft); color:#86efac; border:1px solid rgba(34,197,94,.4);}
+
+/* guide accordion */
+details.guide{
+  border:1px solid var(--border-soft);
+  border-radius:10px; padding:0 16px;
+  background:var(--panel-2);
+}
+details.guide summary{
+  cursor:pointer; padding:14px 0; font-weight:600; font-size:.9rem;
+  color:var(--text); list-style:none;
+  display:flex; align-items:center; gap:10px;
+}
+details.guide summary::-webkit-details-marker{display:none;}
+details.guide summary::before{
+  content:""; width:0; height:0;
+  border-left:5px solid transparent; border-right:5px solid transparent;
+  border-top:6px solid var(--muted);
+  transform:rotate(-90deg); transition:transform .15s;
+}
+details.guide[open] summary::before{transform:rotate(0);}
+details.guide dl{margin:6px 0 14px; font-size:.84rem;}
+details.guide dt{font-weight:700; margin-top:12px; color:var(--text);}
+details.guide dd{margin:3px 0 0; color:var(--muted); line-height:1.55;}
+
+footer{
+  color:var(--muted-2); font-size:.76rem;
+  text-align:center; padding:18px 20px;
+  border-top:1px solid var(--border);
+  background:var(--bg-side);
+}
